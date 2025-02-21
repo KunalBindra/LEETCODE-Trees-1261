@@ -1,0 +1,35 @@
+class FindElements {
+    HashSet<Integer> s=new HashSet<>();
+    public void bfs(TreeNode root,int x)
+    {
+        Queue<TreeNode> q=new LinkedList<>();
+        root.val=x;
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            TreeNode temp=q.poll();
+            s.add(temp.val);
+            if(temp.left!=null)
+            {
+                temp.left.val=2*temp.val+1;
+                q.add(temp.left);
+            }
+            if(temp.right!=null)
+            {
+                temp.right.val=2*temp.val+2;
+                q.add(temp.right);
+            }
+        }
+    }
+
+    public FindElements(TreeNode root) {
+        s.clear();
+        bfs(root,0);
+        
+    }
+    
+    public boolean find(int target) {
+       return s.contains(target);
+        
+    }
+}
